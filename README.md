@@ -1,5 +1,7 @@
 PhoneListener
 ============
+This is a clone of the original plugin to enable functionality in cordova > 3.0
+Please view original plugin here for more information - https://github.com/devgeeks/PhoneListener
 
 Installation
 ------------

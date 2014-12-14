@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="nl.x-services.plugins.headsetdetection"
+        version="1.0">
+
+  <name>PhoneListener</name>
+
+  <description>
+    Detect a phone call state.
+  </description>
+
+  <license>MIT</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <js-module src="www/PhoneListener.js" name="PhoneListener">
+    <clobbers target="window.plugins.PhoneListener" />
+  </js-module>
+  
+
+  <!-- android -->
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="PhoneListener">
+        <param name="android-package" value="org.devgeeks.PhoneListener" />
+      </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    </config-file>
+
+    <source-file src="src/android/org/devgeeks/plugins/PhoneListener.java" target-dir="src/org/devgeeks/plugins"/>
+  </platform>
+
+</plugin>
