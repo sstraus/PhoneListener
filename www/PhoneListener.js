@@ -28,3 +28,5 @@ var PhoneListener = {
 			[]); // no arguments required
 	}
 };
+
+module.exports = PhoneListener;
