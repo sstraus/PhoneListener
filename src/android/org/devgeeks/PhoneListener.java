@@ -72,6 +72,7 @@ public class PhoneListener extends CordovaPlugin  {
 			    		// See if the new state is 'ringing', 'off hook' or 'idle'
 			            if(phoneState != null && phoneState.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
 			            	// phone is ringing, awaiting either answering or canceling
+			            	number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
 			            	state = "RINGING";
 			            	Log.i(LOG_TAG,state);
 			            } else if (phoneState != null && phoneState.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
@@ -85,8 +86,9 @@ public class PhoneListener extends CordovaPlugin  {
 			            } else { 
 			            	state = TYPE_NONE;
 			            	Log.i(LOG_TAG,state);
+			            	Log.i(LOG_TAG,number);
 			            }
-			            updatePhoneState(state,true);
+			            updatePhoneState(state,number,true);
 			        }
 				}
 			};
@@ -100,9 +102,9 @@ public class PhoneListener extends CordovaPlugin  {
 	 * 
 	 * @param phone state sent back to the designated success callback
 	 */
-	private void updatePhoneState(String phoneState, boolean keepCallback) {
+	private void updatePhoneState(String phoneState, String phoneNumber, boolean keepCallback) {
 		if (this.phoneListenerCallbackId != null) {
-			PluginResult result = new PluginResult(PluginResult.Status.OK, phoneState);
+			PluginResult result = new PluginResult(PluginResult.Status.OK, "{\"state\":\""+phoneState+"\",\"number\":\""+phoneNumber+"\"}");
 			result.setKeepCallback(keepCallback);
 			this.success(result, this.phoneListenerCallbackId);
 		}
@@ -127,7 +129,7 @@ public class PhoneListener extends CordovaPlugin  {
 		}
 		else if (action.equals("stopMonitoringPhoneState")) {
 			removePhoneListener();
-            this.updatePhoneState("", false); // release status callback
+            this.updatePhoneState("", "", false); // release status callback
             this.phoneListenerCallbackId = null;
             return new PluginResult(PluginResult.Status.NO_RESULT);
 		}
