@@ -21,7 +21,6 @@ import android.content.IntentFilter;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import org.apache.cordova.api.CordovaInterface;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
