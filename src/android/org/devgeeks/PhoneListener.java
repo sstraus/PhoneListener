@@ -68,7 +68,8 @@ public class PhoneListener extends CordovaPlugin  {
 					if(intent != null && intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
 			            // State has changed
 			            String phoneState = intent.hasExtra(TelephonyManager.EXTRA_STATE) ? intent.getStringExtra(TelephonyManager.EXTRA_STATE) : null;
-			            String state;
+			            String state = "";
++			            String number = "";
 			    		// See if the new state is 'ringing', 'off hook' or 'idle'
 			            if(phoneState != null && phoneState.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
 			            	// phone is ringing, awaiting either answering or canceling
